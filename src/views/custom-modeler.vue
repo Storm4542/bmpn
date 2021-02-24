@@ -2,7 +2,7 @@
   <div class="containers">
     <div class="loading" v-if="loading">Loading...</div>
     <bpmn v-else ref="bpmnCom" :xmlUrl="xmlUrl" @change="changeBpmn" :form="form"></bpmn>
-    <Panel @SAVE_TO_XML="saveToXML"></Panel>
+    <Panel  @SAVE_TO_XML="saveToXML"></Panel>
     <div class="modal" v-if="bpmnNodeVisible" @click="close">
       <div class="modal-content">
         <div class="modal-ctx">
@@ -45,6 +45,7 @@ export default {
       console.log('父组件获取form',form);
       this.form = form;
     },
+
     async init() {
       this.loading = true;
       this.xmlUrl = await this.getXmlUrl();

@@ -160,7 +160,7 @@ export default {
       eventTypes.forEach((eventType) => {
         eventBus.on(eventType, (e) => {
           //节点信息存储
-          this.$store.state.nodeInfo = e;
+          this.$store.state.elementInfo = e;
           this.currentElement = e;
           if (!e || e.element.type === 'bpmn:Process') return;
           if (eventType === 'element.changed') {
@@ -176,8 +176,8 @@ export default {
     updateProperties(data) {
       console.log('检测到变化',data);
       const modeling = this.bpmnModeler.get('modeling');
-      console.log('当前节点',this.$store.state.nodeInfo.element);
-      modeling.updateProperties(this.$store.state.nodeInfo.element, data);
+      console.log('当前节点',this.$store.state.elementInfo.element);
+      modeling.updateProperties(this.$store.state.elementInfo.element, data);
     },
     isInvalid(param) {
       // 判断是否是无效的值

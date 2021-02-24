@@ -5,6 +5,7 @@
         :visible.sync="drawer"
         :direction="direction"
         :before-close="handleClose"
+        @open="onPanelOpen"
     >
       <div>
         <el-form ref="form" :model="form" label-width="80px">
@@ -40,6 +41,9 @@ export default {
     }),
   },
   methods: {
+    onPanelOpen(){
+      console.log('open',this.$store.state.nodeInfo);
+    },
     ...mapMutations(['TOGGLEDRAWER']),
     handleClose(done) {
       this.$confirm('确认关闭？')
@@ -52,7 +56,7 @@ export default {
     onSubmit() {
       //存储节点信息至XML
       this.$emit('SAVE_TO_XML', this.form);
-      this.form = {}
+      this.form = {};
       this.TOGGLEDRAWER(false);
 
     },
