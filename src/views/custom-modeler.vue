@@ -1,18 +1,13 @@
 <template>
   <div class="containers">
-    <div class="loading" v-if="loading">
-        Loading...
-    </div>
+    <div class="loading" v-if="loading">Loading...</div>
     <bpmn v-else ref="bpmnCom" :xmlUrl="xmlUrl" @change="changeBpmn"></bpmn>
+    <Panel></Panel>
     <div class="modal" v-if="bpmnNodeVisible" @click="close">
       <div class="modal-content">
         <div class="modal-ctx">
-          <div class="modal-item">
-            节点id: {{ bpmnNodeInfo.id }}
-          </div>
-          <div class="modal-item">
-            节点type: {{ bpmnNodeInfo.type }}
-          </div>
+          <div class="modal-item">节点id: {{ bpmnNodeInfo.id }}</div>
+          <div class="modal-item">节点type: {{ bpmnNodeInfo.type }}</div>
         </div>
       </div>
     </div>
@@ -21,74 +16,77 @@
 
 <script>
 import { Bpmn } from './../components/bpmn'
+import Panel from '@/components/panel'
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: '',
   components: {
-    Bpmn
+    Bpmn,
+    Panel,
   },
-// 生命周期 - 创建完成（可以访问当前this实例）
+  // 生命周期 - 创建完成（可以访问当前this实例）
   created() {},
-// 生命周期 - 载入后, Vue 实例挂载到实际的 DOM 操作完成，一般在该过程进行 Ajax 交互
+  // 生命周期 - 载入后, Vue 实例挂载到实际的 DOM 操作完成，一般在该过程进行 Ajax 交互
   mounted() {
     this.init()
   },
   data() {
     return {
       loading: false,
-      xmlUrl: ''
+      xmlUrl: '',
     }
   },
-// 方法集合
+  // 方法集合
   methods: {
     ...mapMutations(['TOGGLENODEVISIBLE']),
-    async init () {
+    async init() {
       this.loading = true
       this.xmlUrl = await this.getXmlUrl()
       console.log(this.xmlUrl)
       this.loading = false
     },
-    getXmlUrl () {
-      return new Promise(resolve => {
-          setTimeout(() => {
-              const url = 'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmnMock.bpmn'
-              resolve(url)
-          }, 1000)
+    getXmlUrl() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          const url =
+            'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmnMock.bpmn'
+          resolve(url)
+        }, 1000)
       })
     },
-    changeBpmn ($event) {
+    changeBpmn($event) {
       const { type } = $event
-      console.log('change',$event)
+      console.log('change', $event)
     },
-    close () {
+    close() {
       this.TOGGLENODEVISIBLE(false)
-    }
+    },
   },
-// 计算属性
+  // 计算属性
   computed: {
     ...mapState({
-      bpmnNodeInfo: state => state.bpmn.nodeInfo,
-      bpmnNodeVisible: state => state.bpmn.nodeVisible
-    })
-  }
+      bpmnNodeInfo: (state) => state.bpmn.nodeInfo,
+      bpmnNodeVisible: (state) => state.bpmn.nodeVisible,
+    }),
+  },
 }
 </script>
 
 <style scoped>
-.containers{
-	background-color: #ffffff;
-	width: 100%;
-	height: calc(100vh - 52px);
+.containers {
+  background-color: #ffffff;
+  width: 100%;
+  height: calc(100vh - 52px);
 }
-.canvas{
-	width: 100%;
-	height: 100%;
+.canvas {
+  width: 100%;
+  height: 100%;
 }
-.panel{
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 300px;
+.panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 300px;
 }
 .modal {
   background-color: rgba(0, 0, 0, 0.6);

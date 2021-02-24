@@ -1,6 +1,7 @@
 const bpmn = {
     state: {
         nodeVisible: false,
+        drawer: false,
         nodeInfo: {}
     },
     mutations: {
@@ -9,6 +10,9 @@ const bpmn = {
         },
         SETNODEINFO: (state, info) => {
             state.nodeInfo = info
+        },
+        TOGGLEDRAWER: (state, drawer) => {
+            state.drawer = drawer
         }
     },
     actions: {

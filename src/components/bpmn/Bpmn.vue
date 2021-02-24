@@ -18,7 +18,7 @@
 import { newDiagram } from './newDiagram'
 import CustomModeler from './customModeler'
 import axios from 'axios'
-
+import { mapMutations } from 'vuex'
 export default {
   name: '',
   props: {
@@ -45,6 +45,7 @@ export default {
   },
   // 方法集合
   methods: {
+    ...mapMutations(['TOGGLEDRAWER']),
     async init() {
       this.$nextTick(() => {
         this.initBpmn()
@@ -150,10 +151,11 @@ export default {
           if (eventType === 'element.changed') {
             that.elementChanged(e)
           } else if (eventType === 'element.click') {
+            that.TOGGLEDRAWER(true)
             modeling.updateProperties(e.element, {
               userId: '郑天宇',
             })
-            console.log('点击了element', e.element)
+            console.log('点击了element', e.element.id)
           }
         })
       })
