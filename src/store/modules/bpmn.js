@@ -6,18 +6,17 @@ const bpmn = {
     },
     mutations: {
         TOGGLENODEVISIBLE: (state, visible) => {
-            state.nodeVisible = visible
+            state.nodeVisible = visible;
         },
         SETNODEINFO: (state, info) => {
-            state.nodeInfo = info
+            state.nodeInfo = info;
         },
         TOGGLEDRAWER: (state, drawer) => {
-            state.drawer = drawer
+            state.drawer = drawer;
         }
     },
     actions: {
-
     }
-}
+};
 
-export default bpmn
+export default bpmn;
