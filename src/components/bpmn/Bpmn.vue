@@ -158,7 +158,7 @@ export default {
           } else if (eventType === 'element.click') {
 
             console.log('点击了element', e.element);
-            this.updateProperties(e);
+            // this.updateProperties(e);
           }
         });
       });
