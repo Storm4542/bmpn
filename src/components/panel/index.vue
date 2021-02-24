@@ -41,8 +41,9 @@ export default {
     }),
   },
   methods: {
-    onPanelOpen(){
-      console.log('open',this.$store.state.nodeInfo);
+    onPanelOpen() {
+      this.form = {...this.$store.state.elementInfo.element.businessObject,...this.$store.state.elementInfo.element.businessObject.$attrs}
+      console.log('open', );
     },
     ...mapMutations(['TOGGLEDRAWER']),
     handleClose(done) {

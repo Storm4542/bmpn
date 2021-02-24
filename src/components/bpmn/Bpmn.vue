@@ -178,6 +178,7 @@ export default {
       const modeling = this.bpmnModeler.get('modeling');
       console.log('当前节点',this.$store.state.elementInfo.element);
       modeling.updateProperties(this.$store.state.elementInfo.element, data);
+
     },
     isInvalid(param) {
       // 判断是否是无效的值
