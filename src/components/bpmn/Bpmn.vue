@@ -8,6 +8,8 @@
       </li>
       <li>
         <a ref="saveSvg" href="javascript:" title="保存为svg">保存为svg</a>
+        <button @click="updateProperties">增加属性</button>
+        {{ this.currentElement }}
       </li>
     </ul>
   </div>
@@ -19,6 +21,7 @@ import { newDiagram } from './newDiagram'
 import CustomModeler from './customModeler'
 import axios from 'axios'
 import { mapMutations } from 'vuex'
+
 export default {
   name: '',
   props: {
@@ -41,6 +44,7 @@ export default {
       container: null,
       canvas: null,
       defaultXmlStr: newDiagram,
+      currentElement: '',
     }
   },
   // 方法集合
@@ -140,24 +144,31 @@ export default {
     },
     addEventBusListener() {
       // 监听 element
-      let that = this
       const eventBus = this.bpmnModeler.get('eventBus')
       const modeling = this.bpmnModeler.get('modeling')
+
       const elementRegistry = this.bpmnModeler.get('elementRegistry')
       const eventTypes = ['element.click', 'element.changed']
-      eventTypes.forEach(function (eventType) {
-        eventBus.on(eventType, function (e) {
+      eventTypes.forEach((eventType) => {
+        eventBus.on(eventType, (e) => {
+          console.log('保存的elemnt', e)
+          this.currentElement = e
           if (!e || e.element.type == 'bpmn:Process') return
           if (eventType === 'element.changed') {
-            that.elementChanged(e)
+            this.elementChanged(e)
           } else if (eventType === 'element.click') {
-            that.TOGGLEDRAWER(true)
-            modeling.updateProperties(e.element, {
-              userId: '郑天宇',
-            })
-            console.log('点击了element', e.element.id)
+            this.TOGGLEDRAWER(true)
+            console.log('点击了element', e.element)
+            // this.updateProperties(e);
           }
         })
+      })
+    },
+    updateProperties(e) {
+      console.log('检测到变化')
+      const modeling = this.bpmnModeler.get('modeling')
+      modeling.updateProperties(this.currentElement.element, {
+        USERID: 'zhuliang',
       })
     },
     isInvalid(param) {
