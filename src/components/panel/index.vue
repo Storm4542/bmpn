@@ -9,7 +9,7 @@
     >
       <div>
         <!-- 任务节点 task -->
-        <el-form v-if="this.type == 'bpmn:Task'" ref="form" :model="form" label-width="80px">
+        <el-form v-if="type === 'bpmn:Task'" ref="form" :model="form" label-width="80px">
           <el-form-item label="名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
@@ -19,20 +19,20 @@
           <el-form-item label="选择">
             <el-select v-model="form.value" placeholder="请选择">
               <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="日期">
             <el-date-picker
-              v-model="form.date"
-              align="right"
-              type="date"
-              placeholder="选择日期"
-              >
+                v-model="form.date"
+                align="right"
+                type="date"
+                placeholder="选择日期"
+            >
             </el-date-picker>
           </el-form-item>
           <el-form-item label="资源">
@@ -47,7 +47,7 @@
           </el-form-item>
         </el-form>
         <!-- 开始节点 -->
-        <el-form v-if="this.type == 'bpmn:StartEvent'" ref="form" :model="form" label-width="80px">
+        <el-form v-if="type === 'bpmn:StartEvent'" ref="form" :model="form" label-width="80px">
           <el-form-item label="名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
@@ -90,7 +90,7 @@ export default {
           label: '北京烤鸭'
         }
       ],
-      type:''
+      type: ''
     };
   },
   computed: {
@@ -105,9 +105,9 @@ export default {
     onPanelOpen() {
       console.log(this.$store.state.elementInfo.element.businessObject);
       console.log(this.$store.state.elementInfo.element.businessObject.$type);
-      this.type = this.$store.state.elementInfo.element.businessObject.$type
-      this.form = {...this.$store.state.elementInfo.element.businessObject,...this.$store.state.elementInfo.element.businessObject.$attrs}
-      console.log('open', );
+      this.type = this.$store.state.elementInfo.element.businessObject.$type;
+      this.form = {...this.$store.state.elementInfo.element.businessObject, ...this.$store.state.elementInfo.element.businessObject.$attrs};
+      console.log('open',);
     },
     ...mapMutations(['TOGGLEDRAWER']),
     handleClose(done) {
