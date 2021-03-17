@@ -38,8 +38,8 @@
           </el-form-item>
           <el-form-item label="资源">
             <el-radio-group v-model="form.resource">
-              <el-radio label="线上品牌商赞助"></el-radio>
-              <el-radio label="线下场地免费"></el-radio>
+              <el-radio label="选择1"></el-radio>
+              <el-radio label="选择2"></el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item>
@@ -65,34 +65,16 @@
           <el-form-item label="名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <!-- <el-form-item label="脚本">
-            <el-input v-model="form.script"></el-input>
-          </el-form-item>
-          <el-form-item label="选择">
-            <el-select v-model="form.value" placeholder="请选择">
+          <el-form-item label="类型">
+            <el-select v-model="form.linetypes" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in linetype"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="日期">
-            <el-date-picker
-              v-model="form.date"
-              align="right"
-              type="date"
-              placeholder="选择日期"
-              >
-            </el-date-picker>
-          </el-form-item>
-          <el-form-item label="资源">
-            <el-radio-group v-model="form.resource">
-              <el-radio label="线上品牌商赞助"></el-radio>
-              <el-radio label="线下场地免费"></el-radio>
-            </el-radio-group>
-          </el-form-item> -->
           <el-form-item>
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
             <el-button @click="cancelForm">取消</el-button>
@@ -128,6 +110,15 @@ export default {
         }, {
           value: '选项5',
           label: '北京烤鸭'
+        }
+      ],
+      linetype: [
+        {
+          value: '1',
+          label: '正常'
+        }, {
+          value: '2',
+          label: '回退'
         }
       ],
       type:''
