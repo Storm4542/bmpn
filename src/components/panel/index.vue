@@ -2,7 +2,6 @@
   <div class="panel">
     <el-drawer
         :modal='false'
-        title="我是标题"
         :visible.sync="drawer"
         :direction="direction"
         :before-close="handleClose"
@@ -11,13 +10,13 @@
       <div>
         <!-- 任务节点 task -->
         <el-form v-if="this.type == 'bpmn:Task'" ref="form" :model="form" label-width="80px">
-          <el-form-item label="名称">
+          <el-form-item label="任务名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="脚本">
+          <el-form-item label="任务脚本">
             <el-input v-model="form.script"></el-input>
           </el-form-item>
-          <el-form-item label="选择">
+          <el-form-item label="任务选择">
             <el-select v-model="form.value" placeholder="请选择">
               <el-option
                 v-for="item in options"
@@ -27,7 +26,7 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="日期">
+          <el-form-item label="任务日期">
             <el-date-picker
               v-model="form.date"
               align="right"
@@ -36,11 +35,19 @@
               >
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="资源">
+          <el-form-item label="功能选择">
             <el-radio-group v-model="form.resource">
               <el-radio label="选择1"></el-radio>
               <el-radio label="选择2"></el-radio>
             </el-radio-group>
+          </el-form-item>
+          <el-form-item label="任务备注">
+            <el-input
+              type="textarea"
+              :rows="2"
+              placeholder="请输入内容"
+              v-model="form.textarea">
+            </el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -49,11 +56,19 @@
         </el-form>
         <!-- 开始节点 -->
         <el-form v-if="this.type == 'bpmn:StartEvent'" ref="form" :model="form" label-width="80px">
-          <el-form-item label="名称">
+          <el-form-item label="开始名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="脚本">
+          <el-form-item label="开始脚本">
             <el-input v-model="form.script"></el-input>
+          </el-form-item>
+          <el-form-item label="开始备注">
+            <el-input
+              type="textarea"
+              :rows="2"
+              placeholder="请输入内容"
+              v-model="form.textarea">
+            </el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -62,10 +77,10 @@
         </el-form>
         <!-- 线节点 bpmn:SequenceFlow -->
         <el-form v-if="this.type == 'bpmn:SequenceFlow'" ref="form" :model="form" label-width="80px">
-          <el-form-item label="名称">
+          <el-form-item label="线名称">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="类型">
+          <el-form-item label="线类型">
             <el-select v-model="form.linetypes" placeholder="请选择">
               <el-option
                 v-for="item in linetype"
@@ -74,6 +89,14 @@
                 :value="item.value">
               </el-option>
             </el-select>
+          </el-form-item>
+          <el-form-item label="备注">
+            <el-input
+              type="textarea"
+              :rows="2"
+              placeholder="请输入内容"
+              v-model="form.textarea">
+            </el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -161,4 +184,10 @@ export default {
 </script>
 
 <style>
+  .el-select{
+    width: 100%;
+  }
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+    width: 100%;
+  }
 </style>
