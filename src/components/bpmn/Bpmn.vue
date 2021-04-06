@@ -11,7 +11,27 @@
         <!-- <button @click="updateProperties">增加属性</button>
         {{ this.currentElement }}-->
       </li>
+      <li>
+        <el-button @click="createnewmodel">创建新模型</el-button>
+      </li>
     </ul>
+    <el-dialog title="创建一个新的业务流程模型" :visible.sync="dialogFormVisible">
+      <el-form :model="newform">
+        <el-form-item label="模型名称" :label-width="formLabelWidth">
+          <el-input v-model="newform.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="模型key" :label-width="formLabelWidth">
+          <el-input v-model="newform.ley" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="描述" :label-width="formLabelWidth">
+          <el-input v-model="newform.describe" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -53,6 +73,8 @@ export default {
       canvas: null,
       defaultXmlStr: newDiagram,
       currentElement: '',
+      dialogFormVisible:false,
+      newform:{}
     }
   },
   // 方法集合
@@ -234,6 +256,10 @@ export default {
         link.download = name
       }
     },
+    //创建模型
+    createnewmodel(){
+      this.dialogFormVisible = true
+    }
   },
   // 计算属性
   computed: {},
