@@ -11,6 +11,24 @@
         </div>
       </div>
     </div>
+    <el-dialog title="创建一个新的业务流程模型" :visible.sync="dialogFormVisible">
+      <el-form :model="newForm">
+        <el-form-item label="模型名称" >
+          <el-input v-model="newForm.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="模型key" >
+          <el-input v-model="newForm.key" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="描述" >
+          <el-input v-model="newForm.description" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="init">确 定</el-button>
+      </div>
+    </el-dialog>
+    <el-button class="createNewButton" @click="createNewModel">创建新模型</el-button>
   </div>
 </template>
 
@@ -33,6 +51,8 @@ export default {
   },
   data() {
     return {
+      newForm:{},
+      dialogFormVisible:false,
       loading: false,
       xmlUrl: '',
       form: {},
@@ -51,15 +71,10 @@ export default {
       this.xmlUrl = await this.getXmlUrl();
       console.log(this.xmlUrl);
       this.loading = false;
+      this.dialogFormVisible = false
     },
     getXmlUrl() {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const url =
-              '';
-          resolve(url);
-        }, 1000);
-      });
+      return  this.request.httpPostJson()
     },
     changeBpmn($event) {
       const {type} = $event;
@@ -68,6 +83,10 @@ export default {
     close() {
       this.TOGGLENODEVISIBLE(false);
     },
+    //创建模型
+    createNewModel(){
+      this.dialogFormVisible = true
+    }
   },
   // 计算属性
   computed: {
@@ -127,5 +146,10 @@ export default {
 .modal-item {
   padding: 10px;
   width: 100%;
+}
+.createNewButton{
+  position: fixed;
+  top: 10px;
+  right: 30px;
 }
 </style>
