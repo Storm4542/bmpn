@@ -125,6 +125,7 @@ export default {
           that.setEncoded(downloadSvgLink, 'diagram.svg', err ? null : svg)
         })
         that.saveDiagram(function (err, xml) {
+          console.log(xml)
           that.setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml)
         })
       })

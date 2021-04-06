@@ -56,7 +56,7 @@ export default {
       return new Promise((resolve) => {
         setTimeout(() => {
           const url =
-              'https://hexo-blog-1256114407.cos.ap-shenzhen-fsi.myqcloud.com/bpmnMock.bpmn';
+              '';
           resolve(url);
         }, 1000);
       });
