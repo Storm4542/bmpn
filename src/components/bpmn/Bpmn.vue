@@ -21,7 +21,6 @@
 // 引入相关的依赖
 import {newDiagram} from './newDiagram';
 import CustomModeler from './customModeler';
-import axios from 'axios';
 import {mapMutations} from 'vuex';
 
 export default {
@@ -87,7 +86,8 @@ export default {
         bpmnXmlStr = this.defaultXmlStr;
         this.transformCanvas(bpmnXmlStr);
       } else {
-        this.transformCanvas(this.xmlUrl);
+        // this.transformCanvas(this.xmlUrl);
+        this.transformCanvas(this.defaultXmlStr);
       }
     },
     transformCanvas(bpmnXmlStr) {
