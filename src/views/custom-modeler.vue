@@ -12,7 +12,11 @@
       </div>
     </div>
     <el-dialog title="创建一个新的业务流程模型" :visible.sync="dialogFormVisible">
+<<<<<<< HEAD
       <el-form :model="newForm">
+=======
+      <el-form :model="newForm" >
+>>>>>>> ce18c2a03510cb62050d850996b2ae5279fd0452
         <el-form-item label="模型名称" required>
           <el-input v-model="newForm.name" autocomplete="off"></el-input>
         </el-form-item>

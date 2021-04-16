@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <div class="content">
-      <ul class="router_ul">
-        <router-link v-for="link in links" :key="link.to" tag="li" active-class="activeClass" :to="link.to">{{ link.title }}</router-link>
-      </ul>
        <router-view></router-view>
     </div>
   </div>
@@ -15,9 +12,6 @@ export default {
   components: {},
   data () {
     return {
-      links: [
-        { to: '/custom-modeler', title: '自定义modeler' }
-      ]
     }
   }
 }
@@ -44,7 +38,7 @@ body {
 .router_ul li {
   margin-left: 10px;
   padding: 5px 10px;
-  font-size: 14px;  
+  font-size: 14px;
   border-radius: 5px;
   border: 1px solid #ccc;
   cursor: pointer;
