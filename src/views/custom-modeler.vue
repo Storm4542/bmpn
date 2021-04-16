@@ -13,13 +13,13 @@
     </div>
     <el-dialog title="创建一个新的业务流程模型" :visible.sync="dialogFormVisible">
       <el-form :model="newForm">
-        <el-form-item label="模型名称" >
+        <el-form-item label="模型名称" required>
           <el-input v-model="newForm.name" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="模型key" >
+        <el-form-item label="模型key" required>
           <el-input v-model="newForm.key" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="描述" >
+        <el-form-item label="描述" required>
           <el-input v-model="newForm.description" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
